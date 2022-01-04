@@ -22,3 +22,14 @@ module.exports.getImages = () => {
     const q = "SELECT * FROM images";
     return db.query(q);
 };
+
+module.exports.postImages = (
+    postUrl,
+    postUsername,
+    postTitle,
+    postDescription
+) => {
+    const q = `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4)`;
+    const params = [postUrl, postUsername, postTitle, postDescription];
+    return db.query(q, params);
+};
