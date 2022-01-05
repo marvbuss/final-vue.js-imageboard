@@ -8,6 +8,7 @@
 <body>
     <div id="main">
         <h1>I love Pixels</h1>
+        <first-component v-if="imageSelected" :image-id="imageSelected" @close="closeComponent"></first-component>
         <form>
             <input v-model="title" type="text" name="title" placeholder="title">
             <input v-model="username" type="text" name="username" placeholder="username">
@@ -18,7 +19,7 @@
         <div id="card-container">
             <div class="card" v-for='image in images' :key='image.id'>
                 <p>{{image.title}}</p>
-                <img :src="image.url">   
+                <img @click="imageHandler(image.id)" :src="image.url">   
             </div>
         </div>
     </div>

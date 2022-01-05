@@ -1,6 +1,10 @@
 import * as Vue from "./vue.js";
+import firstComponent from "./firstComponent.js";
 
 Vue.createApp({
+    components: {
+        "first-component": firstComponent,
+    },
     data() {
         return {
             images: [],
@@ -8,6 +12,7 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
+            imageSelected: null,
         };
     },
     mounted() {
@@ -15,6 +20,7 @@ Vue.createApp({
             .then((resp) => resp.json())
             .then((data) => {
                 this.images = data;
+                console.log(this.images);
             })
             .catch(console.log);
     },
@@ -39,6 +45,17 @@ Vue.createApp({
         fileSelectHandler: function (e) {
             console.log("file selected", e);
             this.file = e.target.files[0];
+        },
+        imageHandler: function (selectedId) {
+            console.log("Image was clicked");
+            this.imageSelected = selectedId;
+            console.log(selectedId);
+        },
+        closeComponent() {
+            console.log(
+                "the component has emitted that it should be closed :D"
+            );
+            this.imageSelected = null;
         },
     },
 }).mount("#main");

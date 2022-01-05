@@ -17,7 +17,7 @@ console.log(`[db] connecting to:${database}`);
 
 // ------------------------------- QUERIES --------------------------------
 
-// 1. SELECT to get images
+// 1. SELECT to get all images
 module.exports.getImages = () => {
     const q = "SELECT * FROM images";
     return db.query(q);
