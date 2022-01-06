@@ -7,7 +7,6 @@ const firstComponent = {
     props: ["imageId"],
     data() {
         return {
-            heading: "first component 🧅",
             image: [],
             url: "",
             title: "",

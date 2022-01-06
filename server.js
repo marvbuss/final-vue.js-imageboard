@@ -72,6 +72,16 @@ app.get("/images", (req, res) => {
         .catch(console.log);
 });
 
+app.get("/images/more/:id", (req, res) => {
+    const smallestID = req.params.id;
+    db.getMoreImages(smallestID)
+        .then((input) => {
+            const images = input.rows;
+            res.json(images);
+        })
+        .catch(console.log);
+});
+
 app.get("/comments/:imageId.json", (req, res) => {
     const image_id = req.params.imageId;
     db.getComments(image_id)

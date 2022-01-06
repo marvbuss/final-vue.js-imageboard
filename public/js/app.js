@@ -13,6 +13,7 @@ Vue.createApp({
             username: "",
             file: null,
             imageSelected: null,
+            imageAvailable: 1,
         };
     },
     mounted() {
@@ -56,6 +57,24 @@ Vue.createApp({
                 "the component has emitted that it should be closed :D"
             );
             this.imageSelected = null;
+        },
+        moreClickHandler: function () {
+            fetch("/images/more/" + this.images[this.images.length - 1].id, {
+                method: "GET",
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    for (let i = 0; i < data.length; i++) {
+                        this.images.push(data[i]);
+                    }
+                    if (
+                        this.images[this.images.length - 1].id ==
+                        data[data.length - 1].lowestId
+                    ) {
+                        this.imageAvailable = 0;
+                    }
+                })
+                .catch(console.log);
         },
     },
 }).mount("#main");
