@@ -5,6 +5,7 @@ const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
 const s3 = require("./s3.js");
+const req = require("express/lib/request");
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -67,6 +68,26 @@ app.get("/images", (req, res) => {
         .then((input) => {
             const images = input.rows;
             res.json(images);
+        })
+        .catch(console.log);
+});
+
+app.get("/comments/:imageId.json", (req, res) => {
+    const image_id = req.params.imageId;
+    db.getComments(image_id)
+        .then((input) => {
+            const comments = input.rows;
+            console.log(comments);
+            res.json(comments);
+        })
+        .catch(console.log);
+});
+
+app.post("/comment.json", (req, res) => {
+    db.postComment(req.body.comments_text, req.body.username, req.body.imageId)
+        .then((data) => {
+            console.log(data.rows[0]);
+            res.json(data.rows[0]);
         })
         .catch(console.log);
 });

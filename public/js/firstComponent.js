@@ -1,4 +1,9 @@
+import secondComponent from "./secondComponent.js";
+
 const firstComponent = {
+    components: {
+        "second-component": secondComponent,
+    },
     props: ["imageId"],
     data() {
         return {
@@ -27,11 +32,13 @@ const firstComponent = {
             this.$emit("close");
         },
     },
-    template: `<div id="modal">
+    template: `
+    <div id="modal">
     <div id="modal-container">
     <p @click="notifyParent" class="close">X</p>
     <p>{{image.title}}</p>
     <img :src="image.url">
+    <second-component :image-id="imageId"></second-component>
     </div>
     </div>`,
 };
