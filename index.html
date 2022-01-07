@@ -3,11 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>My Imageboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <div class="head">
+        <h1>SURFGRAM</h1>
+    </div>
     <div id="main">
-        <h1>I love Pixels</h1>
         <first-component v-if="imageSelected" :image-id="imageSelected" @close="closeComponent"></first-component>
         <form>
             <input v-model="title" type="text" name="title" placeholder="title">

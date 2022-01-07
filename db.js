@@ -22,6 +22,12 @@ module.exports.getImages = () => {
     return db.query(q);
 };
 
+module.exports.getImageId = (image_id) => {
+    const q = "SELECT * FROM images WHERE id = $1";
+    const params = [image_id];
+    return db.query(q, params);
+};
+
 module.exports.getMoreImages = (lastId) => {
     const q = `SELECT url, title, id, (SELECT id FROM images ORDER BY id ASC LIMIT 1) AS "lowestId" FROM images WHERE id < $1 ORDER BY id DESC LIMIT 2;`;
     const params = [lastId];

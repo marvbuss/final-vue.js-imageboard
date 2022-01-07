@@ -15,11 +15,14 @@ const firstComponent = {
         };
     },
     mounted() {
-        console.log("first component just mounted");
-        console.log(this.imageId);
-        fetch("/images")
+        console.log(
+            "first component just mounted for this imageId:",
+            this.imageId
+        );
+        fetch(`/images/${this.imageId}`)
             .then((resp) => resp.json())
             .then((data) => {
+                console.log(data);
                 this.image = data.find((e) => e.id == this.imageId);
             })
             .catch(console.log);
