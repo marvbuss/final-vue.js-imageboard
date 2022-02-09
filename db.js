@@ -1,5 +1,5 @@
 const spicedPg = require("spiced-pg");
-const database = "onion-imageboard";
+const database = "final-imageboard";
 const username = "postgres";
 const password = "postgres";
 
