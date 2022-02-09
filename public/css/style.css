@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-#form-container input {
+input {
     margin: 0.5rem;
 }
 
@@ -65,11 +65,16 @@ button {
     padding: 20px;
     border: 1px solid #888;
     width: 75%;
+    position: relative;
 }
 
 .close {
     float: right;
     cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0.25rem;
 }
 
 img {

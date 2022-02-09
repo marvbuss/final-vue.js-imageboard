@@ -24,7 +24,7 @@ module.exports.upload = (req, res, next) => {
 
     const promise = s3
         .putObject({
-            Bucket: "onionximageboard", // <-- should be spicedling if you are using spiced credentials
+            Bucket: "onionximageboard",
             ACL: "public-read", // <-- allows our upload to be accessible by the public
             Key: filename,
             Body: fs.createReadStream(path),
