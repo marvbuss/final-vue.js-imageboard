@@ -40,7 +40,7 @@ module.exports.postImages = (
     postTitle,
     postDescription
 ) => {
-    const q = `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4)`;
+    const q = `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4) RETURNING id;`;
     const params = [postUrl, postUsername, postTitle, postDescription];
     return db.query(q, params);
 };

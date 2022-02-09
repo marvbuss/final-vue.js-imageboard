@@ -88,3 +88,10 @@ img {
     justify-content: center;
     margin-top: 1.5rem;
 }
+
+.comments {
+    display: flex;
+    row-gap: 0.5rem;
+    justify-content: space-between;
+    margin: 1rem;
+}

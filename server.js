@@ -5,7 +5,6 @@ const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
 const s3 = require("./s3.js");
-const req = require("express/lib/request");
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -32,30 +31,25 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 app.post("/upload.json", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("*****************");
-    console.log("POST /upload.json Route");
-    console.log("*****************");
-    console.log("file:", req.file);
-    console.log("input:", req.body);
-    console.log("our file will be reachable at its bucket's url");
-    console.log("with the addition of the filename");
     if (req.file) {
-        const s3Url = `${s3LocationDomain}${req.file.filename}`;
-        const newImage = {
-            url: s3Url,
+        let newImage = {
+            url: `${s3LocationDomain}${req.file.filename}`,
             username: req.body.username,
             title: req.body.title,
             description: req.body.description,
         };
         db.postImages(
-            s3Url,
-            req.body.title,
-            req.body.username,
-            req.body.description
+            newImage.url,
+            newImage.username,
+            newImage.title,
+            newImage.description
         )
-            .then(() => {
-                console.log(newImage);
-                res.json(newImage);
+            .then(({ rows }) => {
+                newImage = {
+                    ...newImage,
+                    id: rows[0].id,
+                };
+                res.json({ success: true, newImage });
             })
             .catch(console.log);
     } else {

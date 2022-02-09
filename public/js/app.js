@@ -10,8 +10,8 @@ Vue.createApp({
             images: [],
             title: "",
             description: "",
-            username: "",
             file: null,
+            username: "",
             imageSelected: null,
             imageAvailable: 1,
         };
@@ -21,7 +21,6 @@ Vue.createApp({
             .then((resp) => resp.json())
             .then((data) => {
                 this.images = data;
-                console.log(this.images);
             })
             .catch(console.log);
     },
@@ -37,25 +36,22 @@ Vue.createApp({
                 body: fd,
             })
                 .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    this.images.unshift(data);
+                .then((res) => {
+                    this.title = "";
+                    this.description = "";
+                    this.$refs.fileInput.value = null;
+                    this.username = "";
+                    this.images.unshift(res.newImage);
                 })
                 .catch(console.log);
         },
         fileSelectHandler: function (e) {
-            console.log("file selected", e);
             this.file = e.target.files[0];
         },
         imageHandler: function (selectedId) {
-            console.log("Image was clicked");
             this.imageSelected = selectedId;
-            console.log(selectedId);
         },
         closeComponent() {
-            console.log(
-                "the component has emitted that it should be closed :D"
-            );
             this.imageSelected = null;
         },
         moreClickHandler: function () {
